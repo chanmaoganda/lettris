@@ -1,3 +1,6 @@
+mod tracer;
+
 fn main() {
-    println!("Hello, world!");
+    tracer::local_time_tracer();
 }
+
