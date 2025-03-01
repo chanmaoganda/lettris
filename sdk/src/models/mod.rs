@@ -1,9 +1,11 @@
-mod consumers;
-mod person;
-mod consumers_impl;
+mod bill;
+mod discount;
 mod goods;
 mod tests;
+mod users;
+mod tags;
 
+pub use bill::*;
 pub use goods::*;
-pub use consumers::*;
-pub use person::*;
+pub use tags::*;
+pub use users::*;

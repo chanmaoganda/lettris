@@ -4,8 +4,7 @@ use serde::{Deserialize, Serialize};
 
 use crate::PriceCaller;
 
-use super::{good_property::GoodProperty, Good};
-
+use super::{Good, GoodProperty};
 
 #[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct AvailableGoodList {
@@ -13,18 +12,14 @@ pub struct AvailableGoodList {
 }
 
 #[derive(Deserialize, Serialize, Debug, Clone)]
-pub struct Bill {
+pub struct RequestedGoodList {
     pub mappings: HashSet<Good>,
 }
 
-impl PriceCaller for Bill {
+impl PriceCaller for RequestedGoodList {
     fn total_price(&self) -> rust_decimal::Decimal {
-        self.mappings.iter()
-            .fold(
-                dec!(0),
-                |acc, x| {
-                    acc + x.total_price()
-                }
-            )
+        self.mappings
+            .iter()
+            .fold(dec!(0), |acc, x| acc + x.total_price())
     }
 }

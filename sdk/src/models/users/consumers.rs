@@ -16,5 +16,5 @@ pub struct Organization {
 
 #[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct Family {
-    pub users: Vec<Person>
+    pub users: Vec<Person>,
 }
