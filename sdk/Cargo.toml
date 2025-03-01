@@ -1,0 +1,10 @@
+[package]
+name = "lettris-sdk"
+version = { workspace = true }
+edition = "2024"
+
+[dependencies]
+hashbrown = { workspace = true }
+rust_decimal = { workspace = true }
+serde = { workspace = true }
+thiserror = { workspace = true }
