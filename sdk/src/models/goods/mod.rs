@@ -1,4 +1,3 @@
-use good_models::{NumberedGoods, WeightedGoods};
 use rust_decimal::Decimal;
 use serde::{Deserialize, Serialize};
 
@@ -9,6 +8,8 @@ mod good_property;
 mod good_list;
 
 pub use good_list::{AvailableGoodList, Bill};
+pub use good_property::GoodProperty;
+pub use good_models::{NumberedGoods, WeightedGoods};
 
 /// FIXME: make good available with weighted and numbered
 #[derive(Deserialize, Serialize, Debug, Clone, Hash, Eq, PartialEq)]

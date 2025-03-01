@@ -1,5 +1,5 @@
 use hashbrown::HashSet;
-use rust_decimal::{prelude::FromPrimitive, Decimal};
+use rust_decimal_macros::dec;
 use serde::{Deserialize, Serialize};
 
 use crate::PriceCaller;
@@ -21,7 +21,7 @@ impl PriceCaller for Bill {
     fn total_price(&self) -> rust_decimal::Decimal {
         self.mappings.iter()
             .fold(
-                Decimal::from_i32(0).unwrap(), 
+                dec!(0),
                 |acc, x| {
                     acc + x.total_price()
                 }
