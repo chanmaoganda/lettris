@@ -25,14 +25,14 @@ CREATE TABLE standard_keep_units (
 CREATE TABLE discount (
 	discount_id INT AUTO_INCREMENT,
 	good_id INT NOT NULL,
-	discount_type VARCHAR(10) NOT NULL DEFAULT 'None',
-	value DECIMAL(10, 2) NOT NULL DEFAULT 0,
+	discount_type enum('Flat', 'Percentage'),
+	discount_value Decimal(10, 2),
 	PRIMARY KEY (discount_id),
 	FOREIGN KEY (good_id) REFERENCES available_goods(good_id)
 );
 
 CREATE VIEW good_property AS
-SELECT name, price, volumes, discount_type, value
+SELECT name, price, volumes, discount_type, discount_value
 FROM available_goods g 
 INNER JOIN standard_keep_units sku 
 ON g.good_id = sku.good_id
