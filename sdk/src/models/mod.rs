@@ -1,5 +1,5 @@
 mod bill;
-mod discount;
+mod discounts;
 mod goods;
 mod tests;
 mod users;

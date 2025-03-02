@@ -19,10 +19,10 @@ impl PriceCaller for WeightedGoods {
 
 impl<F> DiscountCaller<F> for WeightedGoods
 where 
-    F: Fn(Decimal) -> Decimal
+    F: Fn(Decimal, Decimal) -> Decimal
 {
     fn discount_price(&self, f: F) -> Decimal {
-        f(self.weight)
+        f(self.property.unit_price, self.weight)
     }
 }
 
@@ -33,25 +33,31 @@ pub struct NumberedGoods {
     pub number: i32,
 }
 
-impl PriceCaller for NumberedGoods {
-    fn total_price(&self) -> Decimal {
+impl NumberedGoods {
+    pub fn decimal_number(&self) -> Decimal {
         let number = Decimal::from_i32(self.number);
         debug_assert!(
             number.is_some(),
             "{}, number cannot be converted to rust_decimal::Decimal",
             line!()
         );
-        let number = number.unwrap();
+        number.unwrap()
+    }
+}
+
+impl PriceCaller for NumberedGoods {
+    fn total_price(&self) -> Decimal {
+        let number = self.decimal_number();
         number * self.property.unit_price
     }
 }
 
 impl<F> DiscountCaller<F> for NumberedGoods
 where 
-    F: Fn(i32) -> Decimal
+    F: Fn(Decimal, Decimal) -> Decimal
 {
     fn discount_price(&self, f: F) -> Decimal {
-        f(self.number)
+        f(self.property.unit_price, self.decimal_number())
     }
 }
 
@@ -67,6 +73,18 @@ impl PriceCaller for Good {
         match self {
             Self::Weighted(good) => good.total_price(),
             Self::Numbered(good) => good.total_price(),
+        }
+    }
+}
+
+impl<F> DiscountCaller<F> for Good
+where
+    F: Fn(Decimal, Decimal) -> Decimal,
+{
+    fn discount_price(&self, f: F) -> Decimal {
+        match self {
+            Self::Weighted(good) => good.discount_price(f),
+            Self::Numbered(good) => good.discount_price(f),
         }
     }
 }

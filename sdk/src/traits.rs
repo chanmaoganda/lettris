@@ -25,6 +25,8 @@ pub trait PriceCaller {
     fn total_price(&self) -> Decimal;
 }
 
+
+/// TODO: Discount param is still requiring consideration
 pub trait DiscountCaller<F> {
     fn discount_price(&self, f: F) -> Decimal;
 }
