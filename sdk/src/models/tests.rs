@@ -1,7 +1,7 @@
 #[cfg(test)]
 mod tests {
     use crate::{
-        models::discounts::Discount, Company, Consumer, Good, GoodProperty, NumberedGoods, RequestedGoodList, WeightedGoods
+        models::discounts::DiscountRule, Company, Consumer, Good, GoodProperty, NumberedGoods, RequestedGoodList, WeightedGoods
     };
     use rust_decimal_macros::dec;
 
@@ -10,17 +10,20 @@ mod tests {
         let cucumber_props = GoodProperty {
             name: "黄瓜".to_string(),
             unit_price: dec!(1.2),
-            discount: Discount::default(),
+            volumes: dec!(200),
+            discount_rule: None,
         };
         let tomato_props = GoodProperty {
             name: "西红柿".to_string(),
             unit_price: dec!(3.2),
-            discount: Discount::default(),
+            volumes: dec!(200),
+            discount_rule: None,
         };
         let shoe_props = GoodProperty {
             name: "鞋子".to_string(),
             unit_price: dec!(199.9),
-            discount: Discount::default(),
+            volumes: dec!(200),
+            discount_rule: None,
         };
 
         let cucumber = Good::Weighted(WeightedGoods {

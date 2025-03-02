@@ -16,13 +16,15 @@ axum-server = { version = "0.7.1", features = ["tokio-rustls"] }
 # bb8 = "0.8.6"
 # diesel = { workspace = true }
 # diesel-async = { workspace = true }
+dotenv = "0.15.0"
+lettris-sdk = { workspace = true }
+rust_decimal = { workspace = true }
 serde = { workspace = true }
+sqlx = { workspace = true }
 tokio = { workspace = true }
 tracing = { workspace = true }
 tracing-subscriber = { workspace = true }
-lettris-sdk = { workspace = true }
 uuid = { version = "1.15.1", features = ["atomic", "serde"] }
-dotenv = "0.15.0"
 
 [workspace.dependencies]
 arrayvec = { version = "0.7.6", features = ["serde"] }
@@ -36,7 +38,7 @@ rdkafka = "0.37.0"
 rust_decimal = { version = "1.36.0", features = ["db-diesel-mysql"] }
 rust_decimal_macros = "1.36.0"
 serde = { version = "1.0.218", features = ["derive"] }
-sqlx = { version = "0.8.3", features = ["chrono", "mysql", "runtime-tokio-native-tls"] }
+sqlx = { version = "0.8.3", features = ["chrono", "mysql", "runtime-tokio", "tls-native-tls", "rust_decimal"] }
 thiserror = "2.0.11"
 tokio = { version = "1.43.0", features = ["full"] }
 tracing = "0.1.41"

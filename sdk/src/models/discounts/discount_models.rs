@@ -3,14 +3,25 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Deserialize, Serialize, Default, Debug, Clone, Hash, Eq, PartialEq)]
 pub enum DiscountType {
-    Flat,
     #[default]
-    None,
+    Flat,
     Percentage,
 }
 
+impl From<String> for DiscountType {
+    fn from(value: String) -> Self {
+        if value == "Flat" {
+            Self::Flat
+        } else if value == "Percentage" {
+            Self::Percentage
+        } else {
+            panic!("no matching conversion for `{}` to DiscountType", value);
+        }
+    }
+}
+
 #[derive(Deserialize, Serialize, Default, Debug, Clone, Hash, Eq, PartialEq)]
-pub struct Discount {
+pub struct DiscountRule {
     pub discount_type: DiscountType,
     pub value: Decimal,
 }

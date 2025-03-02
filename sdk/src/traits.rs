@@ -30,3 +30,7 @@ pub trait PriceCaller {
 pub trait DiscountCaller<F> {
     fn discount_price(&self, f: F) -> Decimal;
 }
+
+pub trait FromCustomRow<R> {
+    fn from_custom_row(row: R) -> Self;
+}
